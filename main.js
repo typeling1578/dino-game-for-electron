@@ -8,17 +8,15 @@ function createWindow () {
     width: 800,
     height: 350,
     title: 'Dino game',
-    /*
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
-    */
+    },
   })
 
   // default theme
   nativeTheme.themeSource = 'light';
 
-  // switch theme
+  // switch theme and character
   mainWindow.setMenu(Menu.buildFromTemplate([
     {
       label: 'Game Settings',
@@ -34,6 +32,19 @@ function createWindow () {
               nativeTheme.themeSource = 'light';
             }
           },
+        },
+        {
+          label: 'Characters',
+          submenu: [
+            {
+              label: 'Dino',
+              type: 'radio',
+              checked: true,
+              click: function (item) {
+                mainWindow.webContents.send('change-character', 'dino');
+              },
+            },
+          ],
         },
       ],
     },
