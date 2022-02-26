@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="offline">
+<head>
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dino game</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="dino.js"></script>
+  <script src="dino-sprite-definitions.js"></script>
+  <script src="dino-pref.js"></script>
+  
+</head>
+<body id="t" class="neterror">
+  <div id="main-frame-error" class="interstitial-wrapper">
+    <div id="main-content">
+      <div class="icon icon-offline"></div>
+    </div>
+  </div>
+
+  <div id="offline-resources">
+    <img id="offline-resources-1x" src="images/default_100_percent/offline/100-offline-sprite.png">
+    <img id="offline-resources-2x" src="images/default_200_percent/offline/200-offline-sprite.png">
+    <template id="audio-resources">
+      <audio id="offline-sound-press" src=""></audio>
+      <audio id="offline-sound-hit" src=""></audio>
+      <audio id="offline-sound-reached" src=""></audio>
+    </template>
+  </div>
+
+  <script>
+    (async() => {
+      const resourceTemplate = document.getElementById("audio-resources").content;
+
+      let result = await fetch("sounds/button-press.ogg");
+      if (result.ok) {
+        let blob = await result.blob();
+        let reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = resolve;
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        let url = reader.result;
+        resourceTemplate.querySelector("#offline-sound-press").src = url;
+      }
+
+      result = await fetch("sounds/hit.ogg");
+      if (result.ok) {
+        let blob = await result.blob();
+        let reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = resolve;
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        let url = reader.result;
+        resourceTemplate.querySelector("#offline-sound-hit").src = url;
+      }
+
+      result = await fetch("sounds/score-reached.ogg");
+      if (result.ok) {
+        let blob = await result.blob();
+        let reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = resolve;
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        let url = reader.result;
+        resourceTemplate.querySelector("#offline-sound-reached").src = url;
+      }
+
+      var HIDDEN_CLASS = "hidden";
+      new Runner('.interstitial-wrapper');
+    })();
+  </script>
+</body>
+</html>

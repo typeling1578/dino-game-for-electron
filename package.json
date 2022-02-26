@@ -1,0 +1,25 @@
+{
+  "name": "dino-game",
+  "version": "1.0.0",
+  "description": "The Dino game extracted from chromium offline error page.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager ."
+  },
+  "keywords": [
+    "dino",
+    "game",
+    "offline",
+    "chromium",
+    "Electron"
+  ],
+  "author": "typeling1578",
+  "license": "MIT License",
+  "devDependencies": {
+    "electron": "^17.1.0"
+  },
+  "dependencies": {
+    "electron-packager": "^15.4.0"
+  }
+}
