@@ -15,6 +15,10 @@ function createWindow () {
     */
   })
 
+  // default theme
+  nativeTheme.themeSource = 'light';
+
+  // switch theme
   mainWindow.setMenu(Menu.buildFromTemplate([
     {
       label: 'Game Settings',
