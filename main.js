@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, Menu, nativeTheme, BrowserWindow} = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -15,8 +15,25 @@ function createWindow () {
     */
   })
 
-  // Hide the menu.
-  mainWindow.setMenu(null);
+  mainWindow.setMenu(Menu.buildFromTemplate([
+    {
+      label: 'Game Settings',
+      submenu: [
+        {
+          label: 'Night Mode',
+          type: 'checkbox',
+          checked: false,
+          click: function (item) {
+            if (item.checked) {
+              nativeTheme.themeSource = 'dark';
+            } else {
+              nativeTheme.themeSource = 'light';
+            }
+          },
+        },
+      ],
+    },
+  ]))
 
   // and load the index.html of the app.
   mainWindow.loadFile('dino-src/index.html')
