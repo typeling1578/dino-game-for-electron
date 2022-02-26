@@ -34,6 +34,18 @@ function createWindow () {
           },
         },
         {
+          label: 'Active BOT',
+          type: 'checkbox',
+          checked: false,
+          click: function (item) {
+            if (item.checked) {
+              mainWindow.webContents.send('change-botstatus', 'start');
+            } else {
+              mainWindow.webContents.send('change-botstatus', 'stop');
+            }
+          },
+        },
+        {
           label: 'Characters',
           submenu: [
             {
