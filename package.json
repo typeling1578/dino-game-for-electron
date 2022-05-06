@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --all --overwrite --icon=./icon.ico"
+    "build": "electron-packager . --platform win32,linux --arch ia32,x64,armv7l,arm64 --overwrite --icon=./icon.ico"
   },
   "keywords": [
     "dino",
